@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(
     req: Request
 ) {
-    
-    console.log('Olá galerinha de S.I')
-    return NextResponse.json({message: "Hello World backend"})
+
+    console.log('Olá galerinha de sistemas')
+    return NextResponse.json({message: "Hello world backend"})
 }
