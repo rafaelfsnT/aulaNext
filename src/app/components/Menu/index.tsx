@@ -11,14 +11,11 @@ interface ICategorias {
 }
 export const Menu = () => {
 
-
-    
-    const [categorias, setCategorias] = useState<Array<ICategorias>>([]); 
-
+    const [categorias, setCategorias] = useState<ICategorias[]>([]);
 
     useEffect(() => {
 
-        axios.get('http://localhost:3001/categorias') //url que consome os dados backend
+        axios.get(process.env.NEXT_PUBLIC_API_URL + '/categorias') //url que consome os dados backend
             .then((resposta) => {
                 console.log(resposta.data);
 
@@ -44,15 +41,11 @@ export const Menu = () => {
 
                             <NavBarLink href={"/"}>Home</NavBarLink>
 
-                            {
-                                categorias.map((categoria) => (
-                                   <NavBarLink key={categoria.id}
-                                   href={`/categoria/${categoria.id}`}
-                                   >
-                                    {categoria.nome}
-                                   </NavBarLink>
-                                ))
-                            }
+                            {categorias.map((categoria) => (
+            <NavBarLink key={categoria.id} href={`/categorias/${categoria.id}`}>
+              {categoria.nome}
+            </NavBarLink>
+          ))}
                         </NavbarLinkContainer>
                     </LeftContainer>
 

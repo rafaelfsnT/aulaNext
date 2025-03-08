@@ -1,7 +1,21 @@
+'use client'
+import axios from "axios";
 import { Card } from "./components/Card";
 import { Menu } from "./components/Menu";
+import { Iproduto } from "./interfaces";
 
-export default function Home() {
+interface IReqproduto {
+  data: Array<Iproduto>
+}
+
+export default async function Home() {
+
+  const { data }: IReqproduto = await axios.get(process.env.NEXT_PUBLIC_API_URL +
+    '/produtos'
+  )
+
+  console.log(data);
+  
   return (
     <>
       <Menu />
@@ -11,19 +25,29 @@ export default function Home() {
         paddingRight: "6%",
       }}
       >
-        <h2>Produtos em destaque</h2>
+        <h2 style={{
+          textAlign: "center",
+          paddingTop: '30px'
+        }}>Produtos em destaque</h2>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             flexWrap: 'wrap'
           }}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {
+            data.map((produto) => (
+              <Card
+                key={produto.id}
+                id={produto.id}
+                id_categorias={produto.id_categorias}
+                imagemg={produto.imagemg}
+                nome={produto.nome}
+                valor={produto.valor}
+                promo={produto.valor}
+              />
+            ))
+          }
 
         </div>
       </div>

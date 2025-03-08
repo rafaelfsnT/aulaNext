@@ -10,7 +10,7 @@ display: flex;
 flex-direction: column;
 `;
 
-export const NavBarLink = styled(Link)` 
+export const NavBarLink = styled(Link)`
 color: var(--white);
 font-size: large;
 text-decoration: none;
